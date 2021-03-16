@@ -12,6 +12,8 @@ export class UserListComponent implements OnInit {
 
   users$: Observable<User[]> = this.userService.getAll();
 
+  subscribeForDeleteItem: User = new User();
+
   constructor(
     private userService: UserService,
   ) { }
@@ -19,4 +21,24 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  subscribeForDelete(subscribeForDeleteItem: User): void {
+    this.subscribeForDeleteItem = subscribeForDeleteItem;
+  }
+
+  delete(): void {
+    this.userService.delete(this.subscribeForDeleteItem.id);
+    //this.toastr.success('Succesfully deleted!', 'Editor message:');
+  }
+
+  updateItem(user:User): void{
+    this.userService.update(user);
+  }
+
+  deleteItem(id:number): void{
+    this.userService.delete(id);
+  }
+
+  createItem(user:User): void{
+    this.userService.create(user);
+  }
 }
