@@ -38,6 +38,8 @@ export class UserEditorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  user:User = new User;
+
   updating:boolean = false;
 
   saveItem(user:User){
@@ -52,4 +54,14 @@ export class UserEditorComponent implements OnInit {
       this.router.navigate(['']);
     }
   }
+
+  onFormSubmit(form: NgForm): void {
+    if (!form.valid) {
+      //this.toastr.error('Invalid form!', 'Editor message:');
+      alert('Invalid form!');
+      return;
+    }
+    this.saveItem(this.user);
+  }
+
 }

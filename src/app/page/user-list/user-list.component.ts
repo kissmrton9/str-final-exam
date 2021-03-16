@@ -21,8 +21,12 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  subscribeForDelete(subscribeForDeleteItem: User): void {
-    this.subscribeForDeleteItem = subscribeForDeleteItem;
+  subscribeForDelete(user: User): void {
+    this.subscribeForDeleteItem = user;
+    const r = confirm(`Are you sure you want to delete user no. ${user.id}?`);
+    if (r == true) {
+      this.delete();
+    }    
   }
 
   delete(): void {
@@ -38,7 +42,7 @@ export class UserListComponent implements OnInit {
     this.userService.delete(id);
   }
 
-  createItem(user:User): void{
-    this.userService.create(user);
+  createItem(): void{
+    this.userService.create(new User());
   }
 }
