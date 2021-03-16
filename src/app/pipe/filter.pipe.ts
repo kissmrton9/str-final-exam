@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterPipe implements PipeTransform {
 
 
-  transform(value: any[], phrase: string, key: string = ''): any {
+  transform(value: any[] | null, phrase: string, key: string = ''): any {
     if (!Array.isArray(value) || !phrase || !key) {
       return value;
     }
@@ -32,7 +32,7 @@ export class FilterPipe implements PipeTransform {
     //const key2 = 'item' + "['" + arr + "']" + key.replace(arr, '');
 
     phrase = phrase.toLowerCase();
-    return value.filter(item => key.toLowerCase().includes(phrase));
+    return value.filter(item => item[key].toLowerCase().includes(phrase));
 
   }
 }

@@ -19,6 +19,7 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //this.users$ = this.userService.getAll();
   }
 
   subscribeForDelete(user: User): void {
@@ -44,5 +45,28 @@ export class UserListComponent implements OnInit {
 
   createItem(): void{
     this.userService.create(new User());
+  }
+  
+  order:string='id';
+  
+  key:string='name';
+  
+  phrase:string='';
+
+  onChangeOrder(event: Event):void{
+    this.order = (event.target as HTMLInputElement).value;
+  }
+  
+  changeOrder(key: string):void{
+    this.order = key;
+  }
+  
+  onChangePhrase(event: Event):void{
+    this.phrase = (event.target as HTMLInputElement).value;
+  }
+
+  onChangeKey(event: Event):void{
+    this.key = (event.target as HTMLInputElement).value;
+    this.phrase = '';
   }
 }

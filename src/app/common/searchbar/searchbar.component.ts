@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
 
-  //@Output() changeFilter: EventEmitter<Filter> = new EventEmitter();
+  @Output() changeFilter: EventEmitter<{phrase:string,key:string}> = new EventEmitter();
   //@Input() columns: Columns[];
 
   //@Input() usedSortType: string | undefined;
@@ -30,12 +30,14 @@ export class SearchbarComponent implements OnInit {
     
   }
   phrase:string ='';
+  key:string='';
+
 
   onChangePhrase(event: Event): void {
 
     this.phrase = (event.target as HTMLInputElement).value;
     // this.filterChange.emit(this.filter);
-    //this.changeFilter.emit(this.filter);
+    this.changeFilter.emit({phrase:this.phrase,key:this.key});
 
   }
   // onChangePhrase2(event: Event): void {

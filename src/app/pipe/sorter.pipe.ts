@@ -5,15 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SorterPipe implements PipeTransform {
 
-  transform(value: any[], key: string, isAscending: boolean): any[] {
+  transform(value: any[] | null, key: string): any[] | null {
 
     if (typeof (value) === 'undefined' || !Array.isArray(value) || typeof (key) === 'undefined') { return value };
 
-    const arr = key.split('.')[0].split('[')[0];
-    const keyA = 'a' + "['" + arr + "']" + key.replace(arr, '');
-    const keyB = 'b' + "['" + arr + "']" + key.replace(arr, '');
-
-    return value.sort((a: any, b: any) => SorterPipe.compare(eval(keyA), eval(keyB), isAscending));
+    return value.sort((a: any, b: any) => SorterPipe.compare(a[key],b[key],true));
   }
   static compare(a: any, b: any, isAscending:boolean): number {
     if (typeof (a) === 'number' && typeof (b) === 'number') {
